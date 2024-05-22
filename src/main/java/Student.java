@@ -29,4 +29,3 @@ public class Student {
     return new Student(data[0], data[1], Integer.parseInt(data[2]), data[3]);
   }
 }
-
