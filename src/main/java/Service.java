@@ -5,13 +5,14 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Scanner;
+import java.util.List;
 public class Service {
 
   public void addStudent(Student student) throws IOException {
     var f = new FileWriter("db.txt", true);
     var b = new BufferedWriter(f);
-    b.append(student.toString());
+    b.append(student.ToString());
     b.newLine();
     b.close();
   }
@@ -23,7 +24,7 @@ public class Service {
     String line = "";
     while (true) {
       line = reader.readLine();
-      if (line == null)
+      if(line == null)
         break;
       ret.add(Student.Parse(line));
     }
@@ -31,8 +32,25 @@ public class Service {
     return ret;
   }
 
-  public Student findStudentByName(String name) {
+  public Student addStudent(String name, String surname, int age, int datad, int datam, int datar){
+          return null;
+  }
+
+  public Student findStudentByName(String surname) {
+    try {
+      var file = new FileReader("db.txt");
+      var br = new BufferedReader(file);
+      String line;
+      while ((line = br.readLine()) != null) {
+          Student student = Student.Parse(line);
+          if (student.GetSurname().equalsIgnoreCase(surname)) {
+              return student;
+          }
+      }
+      br.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return null;
   }
 }
-
